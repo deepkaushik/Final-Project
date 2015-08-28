@@ -222,6 +222,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
                 intent.putExtra("Longitude", Double.toString(GoogleMapData.getCurrentListing().getLocation().longitude));
                 intent.putExtra("Latitude", Double.toString(GoogleMapData.getCurrentListing().getLocation().latitude));
             }
+            startActivity(intent);
         } catch (InvalidParameterException e) {
             // display any errors that occurred when updating current listing
             String[] exceptionText = e.toString().split(":");

@@ -3,8 +3,8 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/base"
     android:orientation="vertical"
-    android:background="@color/white"
     tools:context="asa.scps.nyu.edu.nycmaps.GoogleMapActivity">
 
     <include layout="@layout/toolbar" />
@@ -13,29 +13,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/address"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/base"
+            android:hint="Enter address"
+            android:imeActionLabel="@string/keyboard_search_label"
             android:inputType="text|textNoSuggestions"
             android:lines="1"
             android:maxLines="1"
-            android:layout_weight="1"
-            android:hint="Enter address"
-            android:textColor="@color/black"
-            android:background="@color/base"
-            android:imeActionLabel="@string/keyboard_search_label"/>
+            android:textColor="@color/black" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:src="@drawable/search"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:onClick="loadCurrentListing"/>
+            android:background="@color/base"
+            android:onClick="loadCurrentListing"
+            android:src="@drawable/search" />
     </LinearLayout>
 
     <fragment

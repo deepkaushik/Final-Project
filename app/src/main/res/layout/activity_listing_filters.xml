@@ -24,6 +24,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:orientation="horizontal">
 
         <TextView
@@ -37,15 +38,18 @@
         <EditText
             android:id="@+id/targetMaxPrice"
             android:layout_width="125dp"
+            android:layout_marginTop="20dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:textColor="@color/white"
-            android:background="@color/darkgrey"/>
+            android:background="@color/darkgrey"
+            android:layout_gravity="center|left" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
         android:orientation="horizontal">
 
         <TextView
@@ -59,17 +63,19 @@
         <Spinner
             android:id="@+id/targetNbrBedrooms"
             android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
             android:layout_margin="5dp"
             android:textColor="@color/white"
-            android:background="@color/darkgrey"/>
+            android:background="@color/darkgrey"
+            android:layout_gravity="center|top" />
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
