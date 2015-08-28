@@ -143,13 +143,17 @@ public class SettingsActivity extends AppCompatActivity implements OnMenuItemCli
             try {
                 startActivity(intent);
             } catch (ActivityNotFoundException e) {
+                // display any errors that occurred when starting activity
                 String[] exceptionText = e.toString().split(":");
                 String errorText = exceptionText[1];
                 Toast toast = Toast.makeText(SettingsActivity.this, errorText, Toast.LENGTH_LONG);
                 toast.show();
             }
         } catch (IllegalArgumentException e) {
-            Toast toast = Toast.makeText(SettingsActivity.this, e.toString(), Toast.LENGTH_LONG);
+            // display any errors that occurred when updating camera angle
+            String[] exceptionText = e.toString().split(":");
+            String errorText = exceptionText[1];
+            Toast toast = Toast.makeText(SettingsActivity.this, errorText, Toast.LENGTH_LONG);
             toast.show();
         }
     }

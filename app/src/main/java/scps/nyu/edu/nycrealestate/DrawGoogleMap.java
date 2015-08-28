@@ -25,6 +25,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -155,6 +156,7 @@ public class DrawGoogleMap extends GoogleMapActivity {
                 TextView addrView = (TextView) view.findViewById(R.id.address);
                 TextView priceView = (TextView) view.findViewById(R.id.price);
                 TextView sqftView = (TextView) view.findViewById(R.id.sqft);
+                TextView pricepersqftView = (TextView) view.findViewById(R.id.price_per_sqft);
                 TextView bedroomView = (TextView) view.findViewById(R.id.nbr_bedrooms);
                 TextView latlngView = (TextView) view.findViewById(R.id.lat_lng);
 
@@ -162,7 +164,9 @@ public class DrawGoogleMap extends GoogleMapActivity {
                 addrView.setText("Address: " + listingData.getAddress());
                 // blank amounts for current listing are saved as -1, so only print if amounts are positive
                 if (listingData.getPrice() > 0) {
-                    priceView.setText("Price: " + listingData.getPrice());
+                    DecimalFormat df = new DecimalFormat("#,###,###.00");
+                    String formattedString = df.format(listingData.getPrice());
+                    priceView.setText("Price: " + "$" + formattedString);
                 } else {
                     priceView.setVisibility(View.GONE);
                 }
@@ -170,6 +174,13 @@ public class DrawGoogleMap extends GoogleMapActivity {
                     sqftView.setText("Square Feet: " + listingData.getSquareFeet());
                 } else {
                     sqftView.setVisibility(View.GONE);
+                }
+                if (listingData.getSquareFeet() > 0) {
+                    DecimalFormat df = new DecimalFormat("#,###,###.00");
+                    String formattedString = df.format(listingData.getPrice()/listingData.getSquareFeet());
+                    pricepersqftView.setText("Price Per Square Feet: " + "$" + formattedString);
+                } else {
+                    pricepersqftView.setVisibility(View.GONE);
                 }
                 int listingNbrBedrooms = listingData.getNumberBedrooms();
                 if (listingNbrBedrooms > 0) {
@@ -184,6 +195,7 @@ public class DrawGoogleMap extends GoogleMapActivity {
                 // initalize StreetEasy statistics views
                 TextView zipcodeView = (TextView) view.findViewById(R.id.zip_code);
                 TextView avgPriceView = (TextView) view.findViewById(R.id.avg_price);
+                TextView avgPricePerSqFtView = (TextView) view.findViewById(R.id.avg_price_per_sqft);
                 TextView avgSqFtView = (TextView) view.findViewById(R.id.avg_sqft);
                 TextView avgWomView = (TextView) view.findViewById(R.id.avg_wom);
 
@@ -239,14 +251,29 @@ public class DrawGoogleMap extends GoogleMapActivity {
                         aptDesc = "for all Listings in ZipCode: ";
                     }
 
+                    DecimalFormat df;
+                    String formattedString;
+
                     if (avgPrice != null) {
-                        avgPriceView.setText("Avg Price " + aptDesc + String.format( "%.2f",avgPrice));
+                        df = new DecimalFormat("#,###,###.00");
+                        formattedString = df.format(avgPrice);
+                        avgPriceView.setText("Avg Price " + aptDesc + "$" + formattedString);
                     } else {
                         avgPriceView.setVisibility(View.GONE);
                     }
 
                     if (avgSqFt != null) {
-                        avgSqFtView.setText("Avg Square Feet " + aptDesc + String.format( "%.2f",avgSqFt));
+                        df = new DecimalFormat("#,###,###.00");
+                        formattedString = df.format(avgSqFt);
+                        avgSqFtView.setText("Avg Square Feet " + aptDesc + formattedString);
+                    } else {
+                        avgSqFtView.setVisibility(View.GONE);
+                    }
+
+                    if ((avgPrice != null) && (avgSqFt != null))  {
+                        df = new DecimalFormat("#,###,###.00");
+                        formattedString = df.format(avgPrice/avgSqFt);
+                        avgPricePerSqFtView.setText("Avg Price Per SqFt " + aptDesc + "$" + formattedString);
                     } else {
                         avgSqFtView.setVisibility(View.GONE);
                     }

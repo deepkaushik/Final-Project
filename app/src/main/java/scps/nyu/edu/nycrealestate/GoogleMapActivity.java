@@ -59,6 +59,12 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
             }
         }
 
+        // reload address from current listing
+        if (GoogleMapData.getCurrentListing() != null) {
+            EditText addressView = (EditText) findViewById(R.id.save_address);
+            addressView.setText(GoogleMapData.getCurrentListing().getAddress());
+        }
+
         // draw map
         SupportMapFragment mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(GoogleMapActivity.this);  // This calls OnMapReady(..). (Asynchronously)
@@ -73,7 +79,9 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
                         updateCurrentListing();
                     } catch (InvalidParameterException e) {
                         // display any errors that occurred when updating current listing
-                        Toast toast = Toast.makeText(GoogleMapActivity.this, e.toString(), Toast.LENGTH_LONG);
+                        String[] exceptionText = e.toString().split(":");
+                        String errorText = exceptionText[1];
+                        Toast toast = Toast.makeText(GoogleMapActivity.this, errorText, Toast.LENGTH_LONG);
                         toast.show();
                     }
                 }
@@ -104,22 +112,12 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
                     double lat = googleAddress.getLatitude();
                     double lng = googleAddress.getLongitude();
 
-                    //Toast toast = Toast.makeText(GoogleMapActivity.this, lat + " " + lng, Toast.LENGTH_LONG);
-                    //toast.show();
-
                     LatLng listingLatLng = new LatLng(lat, lng);
 
                     // set camera to point here
                     GoogleMapData.setCameraLoc(listingLatLng);
 
                     GoogleMapData.setCurrentListing(stringAddress, listingLatLng);
-
-//                    if (!GoogleMapData.isLatLngInSavedListings(listingLatLng)) {
-//
-//                    } else {
-//                        Toast toast = Toast.makeText(GoogleMapActivity.this, R.string.listing_already_exists_error, Toast.LENGTH_LONG);
-//                        toast.show();
-//                    }
 
                     //refresh map
                     SupportMapFragment mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -128,7 +126,6 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
                     throw new InvalidParameterException("Invalid address, please try again");
                 }
             } catch (java.io.IOException e) {
-                // commented out because I figure out how to catch a java.io.IOException
                 throw new InvalidParameterException("IO Error: " + e.toString());
             }
         } else {

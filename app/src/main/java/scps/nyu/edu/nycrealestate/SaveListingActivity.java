@@ -33,7 +33,7 @@ public class SaveListingActivity extends AppCompatActivity implements OnMenuItem
         OnMenuItemLongClickListener {
 
     String newAddress;
-    LatLng newLatLng;
+    LatLng oldLatLng;
 
     private FragmentManager fragmentManager;
     private DialogFragment mMenuDialogFragment;
@@ -76,7 +76,7 @@ public class SaveListingActivity extends AppCompatActivity implements OnMenuItem
             if ((stringLong != null) && (stringLat != null)) {
                 tmpLat = Double.parseDouble(stringLat);
                 tmpLong = Double.parseDouble(stringLong);
-                newLatLng = new LatLng(tmpLat,tmpLong);
+                oldLatLng = new LatLng(tmpLat,tmpLong);
             } else {
                 Toast toast = Toast.makeText(this, getString(R.string.map_save_error), Toast.LENGTH_LONG);
                 toast.show();
@@ -114,50 +114,71 @@ public class SaveListingActivity extends AppCompatActivity implements OnMenuItem
             newNbrBedrooms = Integer.valueOf(stringNbrBedrooms);
         }
 
-        String zipCode = "";
+        // calculate new latitude and longitude from address
         try {
-            Geocoder myLocation = new Geocoder(getApplicationContext(), Locale.getDefault());
-            List<Address> addresses = myLocation.getFromLocation(newLatLng.latitude, newLatLng.longitude, 1);
-            zipCode = addresses.get(0).getPostalCode();
+            Geocoder gc = new Geocoder(getApplicationContext());
+            List<Address> list = gc.getFromLocationName(newAddress, 1);
+
+            if (list.size() > 0) {
+                Address googleAddress = list.get(0);
+
+                double lat = googleAddress.getLatitude();
+                double lng = googleAddress.getLongitude();
+                LatLng newLatLng = new LatLng(lat,lng);
+
+                String zipCode = "";
+                try {
+                    Geocoder myLocation = new Geocoder(getApplicationContext(), Locale.getDefault());
+                    List<Address> addresses = myLocation.getFromLocation(newLatLng.latitude, newLatLng.longitude, 1);
+                    zipCode = addresses.get(0).getPostalCode();
+                } catch (java.io.IOException e) {
+                    Toast toast = Toast.makeText(this, "Invalid address, could not save listing", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+                ParseObject parseListing;
+
+                parseListing = new ParseObject("RealEstateListings");
+                parseListing.put("Description", newDesc);
+                parseListing.put("Address", newAddress);
+                parseListing.put("Latitude", newLatLng.latitude);
+                parseListing.put("Longitude", newLatLng.longitude);
+                if (newPrice > 0) {
+                    parseListing.put("Price", newPrice);
+                }
+                if (newSqFt > 0) {
+                    parseListing.put("Sqft", newSqFt);
+                }
+                if (newNbrBedrooms > 0) {
+                    parseListing.put("NbrBedrooms", newNbrBedrooms);
+                }
+                parseListing.put("ZipCode", zipCode);
+                parseListing.saveInBackground();
+
+                // reset SaveListingActivity fields
+                addressView.setText("");
+                descView.setText("");
+                priceView.setText("");
+                sqftView.setText("");
+                bedroomsView.setText("");
+
+                // goto google map screen
+                Intent intent = new Intent(this, GoogleMapActivity.class);
+                // erase current listing in google maps
+                intent.putExtra("SaveListingCommand", "clear");
+                startActivity(intent);
+
+                // confirm listing saved
+                Toast toast = Toast.makeText(this, "Saved new listing", Toast.LENGTH_LONG);
+                toast.show();
+            } else {
+                Toast toast = Toast.makeText(this, "Invalid address, could not save listing", Toast.LENGTH_LONG);
+                toast.show();
+            }
         } catch (java.io.IOException e) {
-            // ignore exception
+            Toast toast = Toast.makeText(this, "Invalid address, could not save listing", Toast.LENGTH_LONG);
+            toast.show();
         }
-
-        ParseObject parseListing;
-
-        parseListing = new ParseObject("RealEstateListings");
-        parseListing.put("Description", newDesc);
-        parseListing.put("Address", newAddress);
-        parseListing.put("Latitude", newLatLng.latitude);
-        parseListing.put("Longitude", newLatLng.longitude);
-        if (newPrice > 0) {
-            parseListing.put("Price", newPrice);
-        }
-        if (newSqFt > 0) {
-            parseListing.put("Sqft", newSqFt);
-        }
-        if (newNbrBedrooms > 0) {
-            parseListing.put("NbrBedrooms", newNbrBedrooms);
-        }
-        parseListing.put("ZipCode", zipCode);
-        parseListing.saveInBackground();
-
-        // reset SaveListingActivity fields
-        addressView.setText("");
-        descView.setText("");
-        priceView.setText("");
-        sqftView.setText("");
-        bedroomsView.setText("");
-
-        // goto google map screen
-        Intent intent = new Intent(this, GoogleMapActivity.class);
-        // erase current listing in google maps
-        intent.putExtra("SaveListingCommand", "clear");
-        startActivity(intent);
-
-        // confirm listing saved
-        Toast toast = Toast.makeText(this, "Saved new listing", Toast.LENGTH_LONG);
-        toast.show();
     }
 
     @Override
