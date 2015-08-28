@@ -196,30 +196,38 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
         try {
             updateCurrentListing();
 
-            Intent intent = new Intent(GoogleMapActivity.this, SaveListingActivity.class);
+            // since the SaveListingActivity code doesn't handle updating existing database records
+            // we're prohibiting the user from  trying to update data for an existing real estate listing
+            if (!(GoogleMapData.isCurrentLocInSavedListings(GoogleMapData.getCurrentListing().getLocation()))) {
 
-            if (!GoogleMapData.isCurrentLocInSavedListings(GoogleMapData.getCurrentListing().getLocation())) {
-                saveMapData();
+                Intent intent = new Intent(GoogleMapActivity.this, SaveListingActivity.class);
 
-                intent.putExtra("Address", GoogleMapData.getCurrentListing().getAddress());
-                intent.putExtra("Longitude", Double.toString(GoogleMapData.getCurrentListing().getLocation().longitude));
-                intent.putExtra("Latitude", Double.toString(GoogleMapData.getCurrentListing().getLocation().latitude));
+                if (!GoogleMapData.isCurrentLocInSavedListings(GoogleMapData.getCurrentListing().getLocation())) {
+                    saveMapData();
+
+                    intent.putExtra("Address", GoogleMapData.getCurrentListing().getAddress());
+                    intent.putExtra("Longitude", Double.toString(GoogleMapData.getCurrentListing().getLocation().longitude));
+                    intent.putExtra("Latitude", Double.toString(GoogleMapData.getCurrentListing().getLocation().latitude));
+                } else {
+                    intent.putExtra("Address", GoogleMapData.getCurrentListing().getAddress());
+                    intent.putExtra("Description", GoogleMapData.getCurrentListing().getDesc());
+                    if (GoogleMapData.getCurrentListing().getPrice() > 0) {
+                        intent.putExtra("Price", Double.toString(GoogleMapData.getCurrentListing().getPrice()));
+                    }
+                    if (GoogleMapData.getCurrentListing().getSquareFeet() > 0) {
+                        intent.putExtra("SqFt", Integer.toString(GoogleMapData.getCurrentListing().getSquareFeet()));
+                    }
+                    if (GoogleMapData.getCurrentListing().getNumberBedrooms() > 0) {
+                        intent.putExtra("NbrBedrooms", Integer.toString(GoogleMapData.getCurrentListing().getNumberBedrooms()));
+                    }
+                    intent.putExtra("Longitude", Double.toString(GoogleMapData.getCurrentListing().getLocation().longitude));
+                    intent.putExtra("Latitude", Double.toString(GoogleMapData.getCurrentListing().getLocation().latitude));
+                }
+                startActivity(intent);
             } else {
-                intent.putExtra("Address", GoogleMapData.getCurrentListing().getAddress());
-                intent.putExtra("Description", GoogleMapData.getCurrentListing().getDesc());
-                if (GoogleMapData.getCurrentListing().getPrice() > 0) {
-                    intent.putExtra("Price", Double.toString(GoogleMapData.getCurrentListing().getPrice()));
-                }
-                if (GoogleMapData.getCurrentListing().getSquareFeet() > 0) {
-                    intent.putExtra("SqFt", Integer.toString(GoogleMapData.getCurrentListing().getSquareFeet()));
-                }
-                if (GoogleMapData.getCurrentListing().getNumberBedrooms() > 0) {
-                    intent.putExtra("NbrBedrooms", Integer.toString(GoogleMapData.getCurrentListing().getNumberBedrooms()));
-                }
-                intent.putExtra("Longitude", Double.toString(GoogleMapData.getCurrentListing().getLocation().longitude));
-                intent.putExtra("Latitude", Double.toString(GoogleMapData.getCurrentListing().getLocation().latitude));
+                Toast toast = Toast.makeText(GoogleMapActivity.this, getResources().getString(R.string.overwrite_error), Toast.LENGTH_LONG);
+                toast.show();
             }
-            startActivity(intent);
         } catch (InvalidParameterException e) {
             // display any errors that occurred when updating current listing
             String[] exceptionText = e.toString().split(":");

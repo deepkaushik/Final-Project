@@ -13,10 +13,9 @@
 
     <string name="title_activity_google_map">Google Map</string>
     <string name="map_settings">Map Settings</string>
-    <string name="load_addr_button">LOAD ADDR</string>
-    <string name="settings_button">Settings</string>
     <string name="keyboard_search_label">Search</string>
-    <string name="google_voice">Voice input currently disabled</string>
+    <string name="google_voice">Sorry, voice input currently disabled</string>
+    <string name="overwrite_error">Sorry, you cannot update data for existing real estate listings</string>
     <string name="please_wait_msg">Querying data from StreetEasy&#8230;please wait</string>
 
     <!-- Save Listing Page -->
