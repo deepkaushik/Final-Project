@@ -57,12 +57,12 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
             if (eraseAddress != null && eraseAddress.equals("clear")) {
                 GoogleMapData.eraseCurrentListing();
             }
-        }
-
-        // reload address from current listing
-        if (GoogleMapData.getCurrentListing() != null) {
-            EditText addressView = (EditText) findViewById(R.id.save_address);
-            addressView.setText(GoogleMapData.getCurrentListing().getAddress());
+        } else {
+            // reload address from current listing
+            if (GoogleMapData.getCurrentListing() != null) {
+                EditText addressView = (EditText) findViewById(R.id.save_address);
+                addressView.setText(GoogleMapData.getCurrentListing().getAddress());
+            }
         }
 
         // draw map
