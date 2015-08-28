@@ -40,8 +40,8 @@
     <!-- Listing Filters page -->
 
     <string name="title_activity_filters">Listing Filters</string>
-    <string name="max_price_caption">Max Price or "all":</string>
-    <string name="nbr_bedrooms_caption">Number of Bedrooms or "all":</string>
+    <string name="max_price_caption">Max Price:</string>
+    <string name="nbr_bedrooms_caption">Number of Bedrooms:</string>
     <string name="save_filters_button">SAVE LISTING FILTERS</string>
     <string name="filters_save_error">Cannot save with blank fields</string>
 
