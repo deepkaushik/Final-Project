@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#FFFF0000</color>
+    <color name="orange">#FFFF8000</color>
+    <color name="yellow">#FFFFFF00</color>
+    <color name="green">#FF00FF00</color>
+    <color name="lightblue">#18FFFF</color> 
+    <color name="turquoise">#00BCD4</color> 
+    <color name="blue">#FF0000FF</color>
+    <color name="purple">#FF4B0082</color>
+    <color name="indigo">#FF7F00FF</color>
+    <color name="darkgrey">#FF808080</color>
+    <color name="lightgrey">#FFD2B48C</color>
+    <color name="black">#FF000000</color>
+    <color name="blue1">#FF0000FF</color>
+    <color name="purple2">#FF4B0082</color>
+    <color name="card_shadow">#FFD2B48C</color>
+    <color name="bluegreen">#99bdba</color>
+    <color name="deepblue">#92e0da</color>
+    <color name="forcia">#6cf5e9</color>
+    <color name="purple1">#c7b5c6</color>
+    <color name="base">#b5aeb5</color>
+    <color name="actionblue">#FFCCE9EF</color>
+    <color name="lightgreen">#CADEC6 </color>
+    <color name="lighterblue">#CADCE6 </color>
+</resources>

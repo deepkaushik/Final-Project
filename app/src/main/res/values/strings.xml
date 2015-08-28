@@ -1,0 +1,53 @@
+<resources>
+
+    <string name="app_name">New York Real Estate</string>
+
+    <!-- News page -->
+
+    <string name="title_activity_news">Real Estate Glance</string>
+    <string name="context_menu">Context menu</string>
+    <string name="real_estate_title">Real Estate News</string>
+    <string name="real_estate_news1">No Update Today</string>
+
+    <!-- Google Map page -->
+
+    <string name="title_activity_google_map">Google Map</string>
+    <string name="map_settings">Map Settings</string>
+    <string name="load_addr_button">LOAD ADDR</string>
+    <string name="settings_button">Settings</string>
+    <string name="keyboard_search_label">Search</string>
+    <string name="google_voice">Voice input currently disabled</string>
+    <string name="please_wait_msg">Querying data from StreetEasy&#8230;please wait</string>
+
+    <!-- Save Listing Page -->
+
+    <string name="title_activity_save_listing">Save Listing</string>
+    <string name="map_save_error">Listing has no latitiude or longitude</string>
+    <string name="save_address_caption">Address:</string>
+    <string name="save_desc_caption">Description:</string>
+    <string name="save_price_caption">Price:</string>
+    <string name="save_sqft_caption">Square Feet:</string>
+    <string name="save_number_bedrooms">Number of Bedrooms:</string>
+    <string name="save_listing_button">SAVE LISTING</string>
+
+    <!-- Map Settings page -->
+
+    <string name="title_activity_settings">Map Settings</string>
+    <string name="map_type_caption">Map Type:</string>
+    <string name="camera_caption">Camera Angle:</string>
+    <string name="save_settings_button">SAVE MAP SETTINGS</string>
+
+    <!-- Listing Filters page -->
+
+    <string name="title_activity_filters">Listing Filters</string>
+    <string name="max_price_caption">Max Price or "all":</string>
+    <string name="nbr_bedrooms_caption">Number of Bedrooms or "all":</string>
+    <string name="save_filters_button">SAVE LISTING FILTERS</string>
+    <string name="filters_save_error">Cannot save with blank fields</string>
+
+    <!-- Parse.com database info -->
+
+    <string name="parse_app_id">onyBljsQtHLjejXBPvMg9GYZ1lV0aEFgs18bMBop</string>
+    <string name="parse_client_key">GsuIZAm4s75Bq7qSW4SmQWWsFwaEaRclOXAory5i</string>
+
+</resources>
