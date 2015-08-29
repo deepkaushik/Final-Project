@@ -255,7 +255,7 @@ public class DrawGoogleMap extends GoogleMapActivity {
                     if (listingNbrBedrooms > 0) {
                         aptDesc = "for " + listingNbrBedrooms + " Bdrm in " + zipCode + ": ";
                     } else {
-                        aptDesc = "for all listings in zip code: ";
+                        aptDesc = "for all listings in " + zipCode + ": ";
                     }
 
                     DecimalFormat df;

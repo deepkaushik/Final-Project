@@ -24,6 +24,7 @@ import com.yalantis.contextmenu.lib.MenuParams;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,7 +97,9 @@ public class FiltersActivity extends AppCompatActivity implements OnMenuItemClic
 
         if (GoogleMapData.getTargetMaxPrice() != null) {
             if (!(GoogleMapData.getTargetMaxPrice() == null)) {
-                maxPriceView.setText("" + GoogleMapData.getTargetMaxPrice());
+                DecimalFormat formatter = new DecimalFormat("############.00");
+                String formattedPrice = formatter.format(GoogleMapData.getTargetMaxPrice());
+                maxPriceView.setText("" + formattedPrice);
             } else {
                 maxPriceView.setText("All");
             }

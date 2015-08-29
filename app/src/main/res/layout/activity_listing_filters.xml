@@ -13,14 +13,6 @@
 
     <include layout="@layout/toolbar" />
 
-    <!--
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Filters for Listings:"
-        android:textSize="20sp"/>
-    -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,10 +29,11 @@
 
         <EditText
             android:id="@+id/targetMaxPrice"
-            android:layout_width="125dp"
+            android:layout_width="150dp"
             android:layout_marginTop="20dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
+            android:inputType="numberDecimal"
             android:textColor="@color/white"
             android:background="@color/darkgrey"
             android:layout_gravity="center|left" />
@@ -71,11 +64,10 @@
             android:layout_gravity="center|top" />
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
