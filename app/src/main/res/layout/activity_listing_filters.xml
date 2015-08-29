@@ -33,7 +33,6 @@
             android:layout_marginTop="20dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
-            android:inputType="numberDecimal"
             android:textColor="@color/white"
             android:background="@color/darkgrey"
             android:layout_gravity="center|left" />
