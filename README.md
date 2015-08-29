@@ -9,7 +9,7 @@ This application is divided into six different screens and accessable through me
 
 1. LAUNCH SCREEN displays a list of latest real state news articles. We're using static feeds through parse.com.
 
-2. MAP SCREEN - Use can access Maps page from menu button. At the top is an address text field and a search button. Below is a map containing blue markers indicating apartments for sale in New York City. Clicking on each listing will display specifics about that listing from a parse.com database, displayed in an pop-up window. The pop up window shows the details like average price, square footage, and number of weeks on market for all the apartment with that number lot bedrooms in that zip code. User can
+2. MAP SCREEN - User can access Maps page from menu button. At the top is an address text field and a search button. Below is a map containing blue markers indicating apartments for sale in New York City. Clicking on each listing will display specifics about that listing from a parse.com database, displayed in an pop-up window. The pop up window shows the details like average price, square footage, and number of weeks on market for all the apartment with that number lot bedrooms in that zip code. User can
 enter an address and clicking search adds a red marker to the map below at row address listed. 
 
 3. SAVE LISTING screen is use to edit data for a specific real estate listing (either a new listing or an existing one). User can enter data such as a description, price, square footage, and number of bedrooms. All details save and uploade to a parse.com database.
