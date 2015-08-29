@@ -114,6 +114,9 @@ public class NewsActivity extends AppCompatActivity implements OnMenuItemClickLi
             case 3:
                 intent = new Intent(this, FiltersActivity.class);
                 break;
+            case 4:
+                intent = new Intent(this, VoiceRecognitionActivity.class);
+                break;
         }
         if (position > 0) {
             startActivity(intent);
@@ -172,10 +175,14 @@ public class NewsActivity extends AppCompatActivity implements OnMenuItemClickLi
         MenuObject filters = new MenuObject("Select Listings Filters");
         filters.setResource(R.drawable.marker);
 
+        MenuObject voice = new MenuObject("Google Voice Input");
+        voice.setResource(R.drawable.voicesearch);
+
         menuObjects.add(close);
         menuObjects.add(map);
         menuObjects.add(settings);
         menuObjects.add(filters);
+        menuObjects.add(voice);
 
         return menuObjects;
     }

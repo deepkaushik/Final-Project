@@ -17,7 +17,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <TextView
-        android:id="@+id/address"
+    android:id="@+id/address1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="3dp"
+    android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/address2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="3dp"
@@ -53,13 +60,6 @@
 
     <TextView
         android:id="@+id/lat_lng"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:textColor="@color/black"/>
-
-    <TextView
-        android:id="@+id/zip_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="3dp"

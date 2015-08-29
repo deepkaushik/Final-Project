@@ -51,18 +51,37 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
 
         myCustomGoogleMap = new DrawGoogleMap();
 
+        boolean loadCurrentAddress = true;
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            // check if we should erase the current listing after saving
             String eraseAddress = extras.getString("SaveListingCommand");
             if (eraseAddress != null && eraseAddress.equals("clear")) {
                 GoogleMapData.eraseCurrentListing();
+                loadCurrentAddress = false;
             }
-        } else {
-            // reload address from current listing
-            if (GoogleMapData.getCurrentListing() != null) {
-                EditText addressView = (EditText) findViewById(R.id.save_address);
-                addressView.setText(GoogleMapData.getCurrentListing().getAddress());
+
+            // check if we should load address from google voice
+            String voiceAddress = extras.getString("GoogleVoiceCommand");
+            if (voiceAddress != null) {
+                EditText addressEditText = (EditText) findViewById(R.id.address);
+                addressEditText.setText(voiceAddress);
+                try {
+                    updateCurrentListing();
+                    loadCurrentAddress = false;
+                } catch (InvalidParameterException e) {
+                    // display any errors that occurred when updating current listing
+                    String[] exceptionText = e.toString().split(":");
+                    String errorText = exceptionText[1];
+                    Toast toast = Toast.makeText(GoogleMapActivity.this, errorText, Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
+        }
+
+        if (loadCurrentAddress && GoogleMapData.getCurrentListing() != null) {
+            EditText addressView = (EditText) findViewById(R.id.address);
+            addressView.setText(GoogleMapData.getCurrentListing().getAddress());
         }
 
         // draw map
@@ -181,11 +200,10 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
                 intent = new Intent(this, FiltersActivity.class);
                 break;
             case 5:
-                // insert code here to enable google voice input
-                Toast toast = Toast.makeText(GoogleMapActivity.this, getResources().getString(R.string.google_voice), Toast.LENGTH_LONG);
-                toast.show();
+                intent = new Intent(this, VoiceRecognitionActivity.class);
+                break;
         }
-        if ((position > 1) && (position < 5)) {
+        if (position > 1) {
             startActivity(intent);
         }
     }

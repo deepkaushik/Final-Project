@@ -153,7 +153,8 @@ public class DrawGoogleMap extends GoogleMapActivity {
                 }
 
                 TextView descView = (TextView) view.findViewById(R.id.desc);
-                TextView addrView = (TextView) view.findViewById(R.id.address);
+                TextView addr1View = (TextView) view.findViewById(R.id.address1);
+                TextView addr2View = (TextView) view.findViewById(R.id.address2);
                 TextView priceView = (TextView) view.findViewById(R.id.price);
                 TextView sqftView = (TextView) view.findViewById(R.id.sqft);
                 TextView pricepersqftView = (TextView) view.findViewById(R.id.price_per_sqft);
@@ -161,7 +162,13 @@ public class DrawGoogleMap extends GoogleMapActivity {
                 TextView latlngView = (TextView) view.findViewById(R.id.lat_lng);
 
                 descView.setText(listingData.getDesc());
-                addrView.setText("Address: " + listingData.getAddress());
+                String[] address = listingData.getAddress().split("~");
+                addr1View.setText("Address: " + address[0]);
+                if (address.length > 1) {
+                    addr2View.setText("                  " + address[1]);
+                } else {
+                    addr2View.setVisibility(View.GONE);
+                }
                 // blank amounts for current listing are saved as -1, so only print if amounts are positive
                 if (listingData.getPrice() > 0) {
                     DecimalFormat df = new DecimalFormat("#,###,###.00");
@@ -177,7 +184,13 @@ public class DrawGoogleMap extends GoogleMapActivity {
                 }
                 if (listingData.getSquareFeet() > 0) {
                     DecimalFormat df = new DecimalFormat("#,###,###.00");
-                    String formattedString = df.format(listingData.getPrice()/listingData.getSquareFeet());
+                    Double pricePerSquareFoot;
+                    if (listingData.getSquareFeet() != 0) {
+                        pricePerSquareFoot = listingData.getPrice()/listingData.getSquareFeet();
+                    } else {
+                        pricePerSquareFoot = 0.0;
+                    }
+                    String formattedString = df.format(pricePerSquareFoot);
                     pricepersqftView.setText("Price Per Square Feet: " + "$" + formattedString);
                 } else {
                     pricepersqftView.setVisibility(View.GONE);
@@ -193,7 +206,6 @@ public class DrawGoogleMap extends GoogleMapActivity {
                 latlngView.setText("Latitude: " + latitude + " Longitude: " + longitude);
 
                 // initalize StreetEasy statistics views
-                TextView zipcodeView = (TextView) view.findViewById(R.id.zip_code);
                 TextView avgPriceView = (TextView) view.findViewById(R.id.avg_price);
                 TextView avgPricePerSqFtView = (TextView) view.findViewById(R.id.avg_price_per_sqft);
                 TextView avgSqFtView = (TextView) view.findViewById(R.id.avg_sqft);
@@ -208,8 +220,6 @@ public class DrawGoogleMap extends GoogleMapActivity {
                 } catch (java.io.IOException e) {
                     // ignore exception
                 }
-
-                zipcodeView.setText("Zip Code: " + zipCode);
 
                 // read SQL data using zipcode and number of bedrooms in listing as the keys
                 SQLHelper helper = new SQLHelper(context, "streeteasy_stats.db");
@@ -241,6 +251,7 @@ public class DrawGoogleMap extends GoogleMapActivity {
                     streetEastStats.updSQLDatabase(zipCode, Integer.toString(listingNbrBedrooms), context);
                     avgPriceView.setText(context.getResources().getString(R.string.please_wait_msg));
                     avgSqFtView.setVisibility(View.GONE);
+                    avgPricePerSqFtView.setVisibility(View.GONE);
                     avgWomView.setVisibility(View.GONE);
                 } else {
                     // write out zipcode averages to InfoWindow
@@ -248,7 +259,7 @@ public class DrawGoogleMap extends GoogleMapActivity {
                     if (listingNbrBedrooms > 0) {
                         aptDesc = "for " + listingNbrBedrooms + " Bdrm in " + zipCode + ": ";
                     } else {
-                        aptDesc = "for all Listings in ZipCode: ";
+                        aptDesc = "for all listings in zip code: ";
                     }
 
                     DecimalFormat df;
@@ -272,10 +283,16 @@ public class DrawGoogleMap extends GoogleMapActivity {
 
                     if ((avgPrice != null) && (avgSqFt != null))  {
                         df = new DecimalFormat("#,###,###.00");
-                        formattedString = df.format(avgPrice/avgSqFt);
+                        Double avgPricePerSquareFoot;
+                        if (avgSqFt != 0) {
+                            avgPricePerSquareFoot = avgPrice/avgSqFt;
+                        } else {
+                            avgPricePerSquareFoot = 0.0;
+                        }
+                        formattedString = df.format(avgPricePerSquareFoot);
                         avgPricePerSqFtView.setText("Avg Price Per SqFt " + aptDesc + "$" + formattedString);
                     } else {
-                        avgSqFtView.setVisibility(View.GONE);
+                        avgPricePerSqFtView.setVisibility(View.GONE);
                     }
 
                     if (avgWom != null) {

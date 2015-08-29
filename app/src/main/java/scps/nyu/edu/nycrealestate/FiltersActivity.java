@@ -190,6 +190,9 @@ public class FiltersActivity extends AppCompatActivity implements OnMenuItemClic
             case 3:
                 intent = new Intent(this, SettingsActivity.class);
                 break;
+            case 4:
+                intent = new Intent(this, VoiceRecognitionActivity.class);
+                break;
         }
         if (position > 0) {
             startActivity(intent);
@@ -248,10 +251,14 @@ public class FiltersActivity extends AppCompatActivity implements OnMenuItemClic
         MenuObject settings = new MenuObject("Select Map Settings");
         settings.setResource(R.drawable.search);
 
+        MenuObject voice = new MenuObject("Google Voice Input");
+        voice.setResource(R.drawable.voicesearch);
+
         menuObjects.add(close);
         menuObjects.add(news);
         menuObjects.add(map);
         menuObjects.add(settings);
+        menuObjects.add(voice);
 
         return menuObjects;
     }

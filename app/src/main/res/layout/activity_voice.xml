@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context="scps.nyu.edu.nycrealestate.VoiceRecognitionActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <Button android:id="@+id/speakButton"
+        android:text="Click to Talk"
+        android:layout_width="match_parent"
+        android:onClick="speakButtonClicked"
+        android:layout_height="wrap_content"
+        android:background="@color/base"
+        android:src="@drawable/voicesearch"/>
+
+    <ListView android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:background="@color/base"
+        android:layout_weight="1" />
+
+</LinearLayout>

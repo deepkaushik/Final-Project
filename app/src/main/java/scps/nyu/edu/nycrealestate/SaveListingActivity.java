@@ -32,7 +32,6 @@ import java.util.Locale;
 public class SaveListingActivity extends AppCompatActivity implements OnMenuItemClickListener,
         OnMenuItemLongClickListener {
 
-    String newAddress;
     LatLng oldLatLng;
 
     private FragmentManager fragmentManager;
@@ -50,7 +49,7 @@ public class SaveListingActivity extends AppCompatActivity implements OnMenuItem
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            newAddress = extras.getString("Address");
+            String newAddress = extras.getString("Address");
             String stringDesc = extras.getString("Description");
             String stringPrice = extras.getString("Price");
             String stringSqFt = extras.getString("SqFt");
@@ -89,6 +88,7 @@ public class SaveListingActivity extends AppCompatActivity implements OnMenuItem
         // save listing
 
         EditText addressView = (EditText) findViewById(R.id.save_address);
+        String newAddress = addressView.getText().toString();
 
         EditText descView = (EditText) findViewById(R.id.save_description);
         String newDesc = descView.getText().toString();
@@ -130,7 +130,12 @@ public class SaveListingActivity extends AppCompatActivity implements OnMenuItem
                 try {
                     Geocoder myLocation = new Geocoder(getApplicationContext(), Locale.getDefault());
                     List<Address> addresses = myLocation.getFromLocation(newLatLng.latitude, newLatLng.longitude, 1);
-                    zipCode = addresses.get(0).getPostalCode();
+                    Address address = addresses.get(0);
+                    newAddress = "";
+                    for(int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+                        newAddress += address.getAddressLine(i) + "~";
+                    }
+                    zipCode = address.getPostalCode();
                 } catch (java.io.IOException e) {
                     Toast toast = Toast.makeText(this, "Invalid address, could not save listing", Toast.LENGTH_LONG);
                     toast.show();
@@ -206,6 +211,9 @@ public class SaveListingActivity extends AppCompatActivity implements OnMenuItem
             case 4:
                 intent = new Intent(this, FiltersActivity.class);
                 break;
+            case 5:
+                intent = new Intent(this, VoiceRecognitionActivity.class);
+                break;
         }
         if (position > 0) {
             startActivity(intent);
@@ -267,11 +275,15 @@ public class SaveListingActivity extends AppCompatActivity implements OnMenuItem
         MenuObject filters = new MenuObject("View Listings Filters");
         filters.setResource(R.drawable.marker);
 
+        MenuObject voice = new MenuObject("Google Voice Input");
+        voice.setResource(R.drawable.voicesearch);
+
         menuObjects.add(close);
         menuObjects.add(news);
         menuObjects.add(map);
         menuObjects.add(settings);
         menuObjects.add(filters);
+        menuObjects.add(voice);
 
         return menuObjects;
     }
