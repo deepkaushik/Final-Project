@@ -7,7 +7,7 @@ Our app is designed to display real estate listings in the New York City area. I
 
 This application is divided into six different screens and accessable through menu bar [+] sign located at right corner of each screen. User can use these following screens:
 
-1. LAUNCH SCREEN displays a list of latest real state news articles. We're useing static feeds through parse.com.
+1. LAUNCH SCREEN displays a list of latest real state news articles. We're using static feeds through parse.com.
 
 2. MAP SCREEN - Use can access Maps page from menu button. At the top is an address text field and a search button. Below is a map containing blue markers indicating apartments for sale in New York City. Clicking on each listing will display specifics about that listing from a parse.com database, displayed in an pop-up window. The pop up window shows the details like average price, square footage, and number of weeks on market for all the apartment with that number lot bedrooms in that zip code. User can
 enter an address and clicking search adds a red marker to the map below at row address listed. 
