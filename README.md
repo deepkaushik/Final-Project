@@ -14,7 +14,7 @@ enter an address and clicking search adds a red marker to the map below at row a
 
 3. SAVE LISTING screen is use to edit data for a specific real estate listing (either a new listing or an existing one). User can enter data such as a description, price, square footage, and number of bedrooms. All details save and uploade to a parse.com database.
 
-4. FILTER LISTINGF screen allow user to control to filter map results by the number of bedrooms and by the maximum price.
+4. FILTER LISTING screen allow user to control to filter map results by the number of bedrooms and by the maximum price.
 
 5. MAP SETTING allow user to control the style of the google map (normal, hybrid, satellite and terrain).
 
