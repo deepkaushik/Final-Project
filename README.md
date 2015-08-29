@@ -39,5 +39,7 @@ Project Timeline:
 Last but not the least, we're kindly thankful to Mark Meretzky for showing us details and useful example that makes learning easy and all our classmades for full support.
 
 Thanks,
-Team Android - Asa and Deepali
+
+Team Android
+Asa and Deepali
 
