@@ -33,7 +33,7 @@ Project Timeline:
 2. Outlining application and researching API’s and source of data - 6 hours
 3. Design and Programming application: 35 hours
 4. Debugging application: 15 hours
-5 Documenting application: 3 hours
+5  Documenting application: 3 hours
 
 Last but not the least, we're kindly thankful to Mark Meretzky for showing us details and useful examples that made learning easy and all our classmades for their full support.
 
