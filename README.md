@@ -3,7 +3,7 @@
 
 NYC Real Estate App
 
-Out app is designed to display real estate listings in the New York City area. It a open source and was written for the NYU School of Professional Studies Android course NYU INFO1-CE9416, taught by Mark Meretzky,
+Our app is designed to display real estate listings in the New York City area. It a open source and was written for the NYU School of Professional Studies Android course NYU INFO1-CE9416, taught by Mark Meretzky,
 
 This application is divided into six different screens and accessable through menu bar [+] sign located at right corner of each screen. User can use these following screens:
 
