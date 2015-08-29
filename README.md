@@ -18,7 +18,7 @@ enter an address and clicking search adds a red marker to the map below at row a
 
 5. MAP SETTING allow user to control the style of the google map (normal, hybrid, satellite and terrain).
 
-6. GOOGLE VOICE SCREEN allow user to use google speeach api to enter address rather then typing address into map edit field.
+6. GOOGLE VOICE SCREEN allow user to use google speech api to enter address rather then typing address into map edit field.
 
 Future of the app: 
 Currently anyone running the app can post and edit real estate listings without login. In next update user have to login into app before save there search results.
