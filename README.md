@@ -23,11 +23,13 @@ enter an address and clicking search adds a red marker to the map below at row a
 Future of the app: 
 Currently anyone running the app can post and edit real estate listings without login. In next update user have to login into app before save there search results.
 
-Good to Know: 
+Good to Know:
+
 1. For context menu we used third party, Yalantis libraries that makes android user interface objects. 
 2. To get permission to access Google Maps in this application you will need to register with Google and enter your own API key in the google_maps_api.xml file in the values folder
 
 Project Timeline:
+
 1. Kick off meeting and requirements - 4 hours
 2. Outlining application and researching API’s and source of data - 6 hours
 3. Design and Programming application: 35 hours
