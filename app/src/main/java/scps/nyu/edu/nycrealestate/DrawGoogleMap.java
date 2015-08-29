@@ -35,10 +35,6 @@ public class DrawGoogleMap extends GoogleMapActivity {
     Context context;
     GoogleMap map;
 
-    Integer avgPrice;
-    Integer avgSqFt;
-    Integer avgWom;
-
     // draw the google map
     public void drawMap(Context context, final GoogleMap tmpMap, LatLng cameraLoc, float cameraZoom) {
         this.context = context;

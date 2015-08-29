@@ -20,7 +20,7 @@ public class ArticleAdapter extends ArrayAdapter<String>
     {
         super(context, R.layout.articlelayout, strings);
         this.context = context;
-        this.strings = new ArrayList<String>();
+        this.strings = new ArrayList<>();
         this.strings = strings;
     }
 

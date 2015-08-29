@@ -32,11 +32,8 @@ import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Application that handle Voice Recognition intents
- * and display the results
- */
-
+// This class allows the user to speak an address, select the best fit from a list of results
+// and then send that address back to the GoogleMapActivity screen
 public class VoiceRecognitionActivity extends AppCompatActivity implements OnMenuItemClickListener,
         OnMenuItemLongClickListener
 {
@@ -106,7 +103,7 @@ public class VoiceRecognitionActivity extends AppCompatActivity implements OnMen
             // Populate the wordsList with the String values the recognition engine thought it heard
             ArrayList<String> matches = data.getStringArrayListExtra(
                     RecognizerIntent.EXTRA_RESULTS);
-            wordsList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+            wordsList.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
                     matches));
 
             wordsList.setOnItemClickListener(new AdapterView.OnItemClickListener()

@@ -140,8 +140,7 @@ public class GoogleMapData {
     }
 
     public static HashMap<LatLng, RealEstateListing> getSavedListings() {
-        HashMap<LatLng, RealEstateListing> tmpListing = new HashMap<>(savedListings);
-        return tmpListing;
+        return new HashMap<>(savedListings);
     }
 
     public static void eraseSavedListings() {

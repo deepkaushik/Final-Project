@@ -51,8 +51,10 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
 
         myCustomGoogleMap = new DrawGoogleMap();
 
+
         boolean loadCurrentAddress = true;
         Bundle extras = getIntent().getExtras();
+        EditText addressEditText = (EditText) findViewById(R.id.address);
         if (extras != null) {
             // check if we should erase the current listing after saving
             String eraseAddress = extras.getString("SaveListingCommand");
@@ -64,7 +66,6 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
             // check if we should load address from google voice
             String voiceAddress = extras.getString("GoogleVoiceCommand");
             if (voiceAddress != null) {
-                EditText addressEditText = (EditText) findViewById(R.id.address);
                 addressEditText.setText(voiceAddress);
                 try {
                     updateCurrentListing();
@@ -80,8 +81,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
         }
 
         if (loadCurrentAddress && GoogleMapData.getCurrentListing() != null) {
-            EditText addressView = (EditText) findViewById(R.id.address);
-            addressView.setText(GoogleMapData.getCurrentListing().getAddress());
+            addressEditText.setText(GoogleMapData.getCurrentListing().getAddress());
         }
 
         // draw map
@@ -286,7 +286,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMenuItemCl
         setSupportActionBar(mToolbar);
         try {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
-        } catch (NullPointerException e) {
+        } catch (java.lang.NullPointerException e) {
             // do nothing
         }
         mToolBarTextView.setText(R.string.title_activity_google_map);
